@@ -40,7 +40,7 @@ public class TelegramUpdateHandler : IUpdateHandler
         await (update switch
         {
             { Message: { } message } => OnMessage(message),
-            _ => UnknownUpdateHandler(update)
+            _ => UnknownUpdateTypeHandler(update)
         });
     }
 
@@ -57,6 +57,10 @@ public class TelegramUpdateHandler : IUpdateHandler
         CancellationToken cancellationToken) =>
         throw new NotImplementedException();
 
+
+    /// <summary> Обработчик нового сообщения в Telegram </summary>
+    /// <param name="message"> Telegram.Bot.Types.Message-данные сообщения </param>
+    /// <returns></returns>
     private async Task OnMessage(Message message)
     {
         _logger.LogInformation("Receive message type: {MessageType}", message.Type);
@@ -67,7 +71,10 @@ public class TelegramUpdateHandler : IUpdateHandler
         await _telegramNotificationService.SendMessage(message.Chat, $"RECEIVED MESSAGE: {message.Text}");
     }
 
-    private Task UnknownUpdateHandler(Update update)
+    /// <summary> Обработчик неизвестного типа обновлений в Telegram </summary>
+    /// <param name="update"> Данные об обновлении в Telegram </param>
+    /// <returns></returns>
+    private Task UnknownUpdateTypeHandler(Update update)
     {
         _logger.LogInformation("Unknown update type {UpdateType}:", update.Type);
 
