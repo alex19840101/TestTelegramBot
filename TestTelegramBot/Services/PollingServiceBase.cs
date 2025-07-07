@@ -24,6 +24,11 @@ public abstract class PollingServiceBase<TReceiverService> : BackgroundService
         _logger = logger;
     }
 
+    /// <summary> Задача для асинхронного выполнения (с возможностью отмены).
+    /// <para>This method is called when the <see cref="IHostedService"/> starts. The implementation should return a task that represents the lifetime of the long running operation(s) being performed. </para></summary>
+    /// <param name="cancellationToken">Triggered when <see cref="IHostedService.StopAsync(CancellationToken)"/> is called.</param>
+    /// <returns>A <see cref="Task"/> that represents the long running operations.</returns>
+    /// <remarks>See <see href="https://learn.microsoft.com/dotnet/core/extensions/workers">Worker Services in .NET</see> for implementation guidelines.</remarks>
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Starting polling service");
