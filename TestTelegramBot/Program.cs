@@ -1,19 +1,35 @@
+using System;
+using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using TestTelegramBot;
 
 const string SERVICE_NAME = "TestTelegramBot";
+const string APPSETTINGS_BOT_SECTION = "TelegramBot";
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 builder.Services.AddSwaggerAndVersioning(SERVICE_NAME);
+
+builder.Services.Configure<TelegramBotClientOptionsSettings>(config: builder.Configuration.GetSection(key: APPSETTINGS_BOT_SECTION));
+
+builder.Services.AddHttpClient(name: "TestTelegram.Bot.Client")
+    .AddTypedClient<Telegram.Bot.ITelegramBotClient>(factory: (HttpClient httpClient, IServiceProvider serviceProvider) =>
+    {
+        var botSettings = serviceProvider.GetRequiredService<IOptions<TelegramBotClientOptionsSettings>>().Value;
+        ArgumentNullException.ThrowIfNull(botSettings);
+        ArgumentNullException.ThrowIfNull(botSettings.BotToken);
+        var botOptions = new Telegram.Bot.TelegramBotClientOptions(botSettings.BotToken);
+        return new Telegram.Bot.TelegramBotClient(options: botOptions, httpClient);
+
+    });
 
 var app = builder.Build();
 
@@ -30,8 +46,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 
