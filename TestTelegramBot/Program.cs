@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using TestTelegramBot;
+using TestTelegramBot.Interfaces;
+using TestTelegramBot.Services;
 
 const string SERVICE_NAME = "TestTelegramBot";
 const string APPSETTINGS_BOT_SECTION = "TelegramBot";
@@ -30,6 +32,8 @@ builder.Services.AddHttpClient(name: "TestTelegram.Bot.Client")
         return new Telegram.Bot.TelegramBotClient(options: botOptions, httpClient);
 
     });
+
+builder.Services.AddScoped<ITelegramNotificationService, TelegramNotificationsService>();
 
 var app = builder.Build();
 
