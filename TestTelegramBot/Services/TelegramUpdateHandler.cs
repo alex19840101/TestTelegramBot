@@ -10,13 +10,13 @@ using TestTelegramBot.Interfaces;
 
 namespace TestTelegramBot.Services;
 
-/// <summary> Обработчик обновлений в Telegram </summary>
+/// <summary> Обработчик обновлений из Telegram </summary>
 public class TelegramUpdateHandler : IUpdateHandler
 {
     private readonly ITelegramNotificationService _telegramNotificationService;
     private readonly ILogger<TelegramUpdateHandler> _logger;
 
-    /// <summary> Конструктор обработчика обновлений в Telegram </summary>
+    /// <summary> Конструктор обработчика обновлений из Telegram </summary>
     public TelegramUpdateHandler(
         ITelegramNotificationService telegramService,
         ILogger<TelegramUpdateHandler> logger)
@@ -25,7 +25,7 @@ public class TelegramUpdateHandler : IUpdateHandler
         _logger = logger;
     }
 
-    /// <summary> Обработчик обновлений в Telegram для Telegram.Bot.
+    /// <summary> Обработчик обновлений из Telegram для Telegram.Bot.
     /// <para>Handles an <see cref="Update"/></para></summary>
     /// <param name="botClient">The <see cref="ITelegramBotClient"/> instance of the bot receiving the <see cref="Update"/></param>
     /// <param name="update">The <see cref="Update"/> to handle</param>
@@ -58,7 +58,7 @@ public class TelegramUpdateHandler : IUpdateHandler
         throw new NotImplementedException();
 
 
-    /// <summary> Обработчик нового сообщения в Telegram </summary>
+    /// <summary> Обработчик нового Telegram-сообщения </summary>
     /// <param name="message"> Telegram.Bot.Types.Message-данные сообщения </param>
     /// <returns></returns>
     private async Task OnMessage(Message message)
@@ -71,7 +71,7 @@ public class TelegramUpdateHandler : IUpdateHandler
         await _telegramNotificationService.SendMessage(message.Chat, $"RECEIVED MESSAGE: {message.Text}");
     }
 
-    /// <summary> Обработчик неизвестного типа обновлений в Telegram </summary>
+    /// <summary> Обработчик неизвестного типа обновлений из Telegram </summary>
     /// <param name="update"> Данные об обновлении в Telegram </param>
     /// <returns></returns>
     private Task UnknownUpdateTypeHandler(Update update)

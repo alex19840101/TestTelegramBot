@@ -35,6 +35,8 @@ builder.Services.AddHttpClient(name: "TestTelegram.Bot.Client")
 
 builder.Services.AddScoped<ITelegramNotificationService, TelegramNotificationsService>();
 builder.Services.AddScoped<TelegramUpdateHandler>();
+builder.Services.AddScoped<TelegramUpdatesReceiverService>();
+builder.Services.AddHostedService<PollingService>();
 
 var app = builder.Build();
 
