@@ -1,4 +1,7 @@
-﻿using Asp.Versioning;
+﻿using System;
+using System.IO;
+using Asp.Versioning;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 namespace TestTelegramBot
