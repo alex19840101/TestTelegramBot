@@ -1,0 +1,6 @@
+@TestTelegramBot_HostAddress = http://localhost:5144
+
+GET {{TestTelegramBot_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
