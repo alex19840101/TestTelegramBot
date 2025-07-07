@@ -28,6 +28,7 @@ public class TelegramUpdatesReceiverServiceBase<TUpdateHandler> : ITelegramUpdat
         _logger = logger;
     }
 
+    /// <summary> Получение обновлений из Telegram </summary>
     public async Task ReceiveUpdates(CancellationToken cancellationToken = default)
     {
         var receiverOptions = new Telegram.Bot.Polling.ReceiverOptions()

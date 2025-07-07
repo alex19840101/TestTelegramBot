@@ -22,6 +22,11 @@ namespace TestTelegramBot.Services
             _logger = logger;
         }
 
+        /// <summary> Отправка уведомления в Telegram </summary>
+        /// <param name="chatId"></param>
+        /// <param name="text"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<Telegram.Bot.Types.Message> SendMessage(
             Telegram.Bot.Types.ChatId chatId,
             string text,

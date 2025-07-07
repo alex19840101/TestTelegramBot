@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 
 namespace TestTelegramBot
 {
+    /// <summary> Расширения для IServiceCollection </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
