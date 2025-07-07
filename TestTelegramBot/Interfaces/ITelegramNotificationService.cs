@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 namespace TestTelegramBot.Interfaces
 {
+    /// <summary> Нотификатор, отправляющий Telegram-уведомления </summary>
     public interface ITelegramNotificationService
     {
         /// <summary> Отправка уведомления в Telegram </summary>
