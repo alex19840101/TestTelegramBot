@@ -8,12 +8,14 @@ using TestTelegramBot.Interfaces;
 
 namespace TestTelegramBot.Services;
 
+/// <summary> Сервис для опроса Telegram Bot API </summary>
 public abstract class PollingServiceBase<TReceiverService> : BackgroundService
     where TReceiverService : ITelegramUpdatesReceiverService
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<PollingServiceBase<TReceiverService>> _logger;
 
+    /// <summary> Конструктор сервиса для опроса Telegram Bot API </summary>
     public PollingServiceBase(
         IServiceProvider serviceProvider,
         ILogger<PollingServiceBase<TReceiverService>> logger)

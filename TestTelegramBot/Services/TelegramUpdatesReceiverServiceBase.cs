@@ -9,7 +9,7 @@ using TestTelegramBot.Interfaces;
 
 namespace TestTelegramBot.Services;
 
-/// <summary> ���������� ���������� �� Telegram </summary>
+/// <summary> Получатель обновлений из Telegram </summary>
 public class TelegramUpdatesReceiverServiceBase<TUpdateHandler> : ITelegramUpdatesReceiverService
     where TUpdateHandler : Telegram.Bot.Polling.IUpdateHandler
 {
@@ -17,6 +17,7 @@ public class TelegramUpdatesReceiverServiceBase<TUpdateHandler> : ITelegramUpdat
     private readonly Telegram.Bot.Polling.IUpdateHandler _updateHandler;
     private readonly ILogger<TelegramUpdatesReceiverServiceBase<TUpdateHandler>> _logger;
 
+    /// <summary> Конструктор получателя обновлений из Telegram </summary>
     public TelegramUpdatesReceiverServiceBase(
         Telegram.Bot.ITelegramBotClient botClient,
         Telegram.Bot.Polling.IUpdateHandler updateHandler,

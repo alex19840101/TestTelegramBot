@@ -3,5 +3,8 @@ using Microsoft.Extensions.Logging;
 
 namespace TestTelegramBot.Services;
 
+/// <summary> Сервис для опроса Telegram Bot API </summary>
+/// <param name="serviceProvider"></param>
+/// <param name="logger"></param>
 public class PollingService(IServiceProvider serviceProvider, ILogger<PollingService> logger)
     : PollingServiceBase<TelegramUpdatesReceiverService>(serviceProvider, logger);
